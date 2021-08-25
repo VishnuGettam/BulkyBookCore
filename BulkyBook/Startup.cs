@@ -1,4 +1,5 @@
 using BulkyBook.DataAccess.Data;
+using BulkyBook.DataAccess.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +35,9 @@ namespace BulkyBook
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<IUnitofWork, UnitofWork>();
+
             services.AddControllersWithViews();
         }
 
