@@ -1,0 +1,28 @@
+﻿@model IEnumerable<BulkyBook.Models.ViewModels.Category>
+
+<div class="row">
+    <div class="col-6">
+        Category List
+    </div>
+    <div class="col-6 text-end">
+        <a class="btn btn-primary btn-sm" asp-action="UpSert" asp-area="Admin"> <i class="fas fa-plus"></i> Create New Category</a>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <table class="table table-bordered" id="tableCategory">
+        <thead class="table-primary">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript" src="~/js/Category.js"></script>
+}

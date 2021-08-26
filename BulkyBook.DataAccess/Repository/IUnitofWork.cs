@@ -10,5 +10,7 @@ namespace BulkyBook.DataAccess.Repository
     {
         ICategoryRepository Category { get; }
         IStoredProcedureCall StoredProcedureCall { get; }
+
+        void Save();
     }
 }
