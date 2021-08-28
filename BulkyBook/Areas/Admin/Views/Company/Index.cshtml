@@ -1,0 +1,35 @@
+﻿@model IEnumerable<BulkyBook.Models.ViewModels.Company>
+
+<div class="row">
+    <div class="col-6">
+        Company List
+    </div>
+    <div class="col-6 text-end">
+        <a class="btn btn-primary btn-sm" asp-action="UpSert" asp-area="Admin"> <i class="fas fa-plus"></i> Create New Company</a>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <table class="table table-bordered" id="tableCompany">
+        <thead class="table-primary">
+            <tr>
+                <th>Name</th>
+                <th>StreetAddress</th>
+                <th>City</th>
+                <th>State</th>
+                <th>PostalCode</th>
+                <th>PhoneNumber</th>
+                <th>IsAuthorizedCompany</th>
+                <th style="width:150px">
+
+
+                </th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript" src="~/js/Company.js"></script>
+} 

@@ -1,4 +1,5 @@
 ﻿using BulkyBook.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,5 +20,9 @@ namespace BulkyBook.DataAccess.Data
         public DbSet<CoverType> CoverTypes { get; set; }
 
         public DbSet<Product> Products { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        public DbSet<Company> Companies { get; set; }
     }
 }

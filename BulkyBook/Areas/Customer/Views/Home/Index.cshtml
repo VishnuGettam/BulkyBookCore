@@ -1,8 +1,26 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<BulkyBook.Models.ViewModels.Product>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="container">
+        <div class="row">
+
+            @foreach (var product in Model)
+            {
+
+                <div class="card w-25 h-35  col-1 m-1 ">
+                    <img class="card-img" src="data:image/png;base64,@product.ImageURL" style="width:250px;height:350px" alt="No Img" />
+                    <div class="card-header">
+                        @product.Title
+                    </div>
+                    <div class="card-body">
+                        <span style="font-weight:bold"> Description : </span>  @product.Description   <br />
+                        <span style="font-weight:bold"> List Price : </span>  @product.ListPrice   <br />
+                        <span style="font-weight:bold"> Price as Low : </span>  @product.Price   <br />
+                    </div>
+                    <div class="card-footer   ">
+                        <a class="btn btn-primary float-start" asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-id="@product.Id">Details</a>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
