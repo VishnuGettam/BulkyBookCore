@@ -17,6 +17,8 @@ namespace BulkyBook.DataAccess.Repository
 
         ICompanyRepository Company { get; }
 
+        IAppUserRepository ApplicationUser { get; }
+
         void Save();
     }
 }
