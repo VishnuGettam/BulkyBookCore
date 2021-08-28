@@ -1,0 +1,28 @@
+﻿@model IEnumerable<BulkyBook.Models.ViewModels.CoverType>
+
+<div class="row">
+    <div class="col-6">
+        CoverType List
+    </div>
+    <div class="col-6 text-end">
+        <a class="btn btn-primary btn-sm" asp-action="UpSert" asp-area="Admin"> <i class="fas fa-plus"></i> Create New CoverType</a>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <table class="table table-bordered" id="tableCoverType">
+        <thead class="table-primary">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript" src="~/js/CoverType.js"></script>
+}

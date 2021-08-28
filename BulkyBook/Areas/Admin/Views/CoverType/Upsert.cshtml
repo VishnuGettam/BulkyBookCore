@@ -1,0 +1,42 @@
+﻿@model BulkyBook.Models.ViewModels.CoverType
+
+@{
+    string screenname = (@Model == null) ? "Create" : "Edit";
+
+}
+
+<form method="post" asp-area="Admin" asp-action="UpSert" asp-controller="CoverType">
+
+    <div class="row text-start">
+        <h2 class="h2" style="color:darkslategray">  @screenname   CoverType   </h2>
+    </div>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger">
+    </div>
+
+    <div class="row">
+        <div class="col-8">
+            <label asp-for="Name" class="form-label"></label>
+        </div>
+        <div class="col-8">
+            <input type="text" asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row mt-4">
+        @if (Model == null)
+        {
+            <partial name="~/Views/Shared/_CreateCoverTypePartial.cshtml" />
+        }
+        else
+        {
+            <partial name="~/Views/Shared/_EditCoverTypePartial.cshtml" model="@Model.Id" />
+        }
+    </div>
+</form>
+
+@section Scripts{
+
+    <partial name="~/Views/Shared/_ValidationScriptsPartial.cshtml" />
+
+}

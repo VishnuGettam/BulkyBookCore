@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace BulkyBook.Utility
 {
-    public class SD
+    public static class SD
     {
+        public enum CoverTypeSP
+        {
+            GetAllCoverType,
+            GetCoverType,
+            AddCoverType,
+            UpdateCoverType,
+            DeleteCoverType
+        }
     }
 }

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<BulkyBook.Models.ViewModels.Product>
+
+<div class="row">
+    <div class="col-6">
+        Product List
+    </div>
+    <div class="col-6 text-end">
+        <a class="btn btn-primary btn-sm" asp-action="UpSert" asp-area="Admin"> <i class="fas fa-plus"></i> Create New Product</a>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <table class="table table-bordered" id="tableProduct">
+        <thead class="table-primary">
+            <tr>
+
+                <th></th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>ISBN</th>
+                <th>Author</th>
+                <th>ListPrice</th>
+                <th>Price</th>
+                <th>Price50</th>
+                <th>Price100</th>
+                <th>Category</th>
+                <th>CoverType</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript" src="~/js/Product.js"></script>
+}

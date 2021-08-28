@@ -1,0 +1,115 @@
+﻿@model BulkyBook.Models.ViewModels.Product
+
+<div class="container-fluid">
+
+    <div class="row text-center">
+        <h2 class="h2 fst-italic fw-bold"> @ViewBag.Type Product </h2>
+    </div>
+
+    <form method="post" asp-action="Upsert" asp-controller="Product" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger">
+        </div>
+
+        @if (ViewBag.Type == "Update")
+        {
+            <div class="row">
+                <div class="col-6">
+                    <img src="@Model.ImageURL" class="img img-thumbnail" style="height:250px;width:250px" alt="No Img" />
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-6">
+                <label asp-for="Title" class=" form-label "></label>
+            </div>
+            <div col="6">
+                <input type="text" asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label asp-for="Description" class=" form-label "></label>
+            </div>
+            <div col="6">
+                <input type="text" asp-for="Description" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label asp-for="ISBN" class=" form-label "></label>
+            </div>
+            <div col="6">
+                <input type="text" asp-for="ISBN" class="form-control" />
+                <span asp-validation-for="ISBN" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label asp-for="Author" class=" form-label "></label>
+            </div>
+            <div col="6">
+                <input type="text" asp-for="Author" class="form-control" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label asp-for="ListPrice" class=" form-label "></label>
+            </div>
+            <div col="6">
+                <input type="text" asp-for="ListPrice" class="form-control" />
+                <span asp-validation-for="ListPrice" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label asp-for="Price" class=" form-label "></label>
+            </div>
+            <div col="6">
+                <input type="text" asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mt-2 mb-2">
+            <div class="col-6">
+                <label asp-for="Category" class=" form-check-label    "></label>
+
+                @Html.DropDownListFor(m => m.CategoryId, new SelectList(ViewBag.Categories, "Value", "Text"), "select ", new { @class = "dropdown w-75" })
+
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <div class="col-6">
+                <label asp-for="CoverType" class=" form-check-label   "></label>
+
+                @Html.DropDownListFor(m => m.CoverTypeId, new SelectList(ViewBag.CoverTypes, "Value", "Text"), " select ", new { @class = "dropdown w-75" })
+
+                <span asp-validation-for="CoverTypeId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <input type="file" asp-for="ImageURL" id="ImageURL" />
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-6">
+                @{ var valueType = ViewBag.Type == "Update" ? "Update" : "Create"; }
+                <input type="submit" class="btn btn-sm btn-success" value="@valueType" />
+                <a class="btn btn-sm btn-danger" asp-action="Index" asp-controller="Product">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial.cshtml" />
+} 
