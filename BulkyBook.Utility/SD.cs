@@ -16,5 +16,10 @@ namespace BulkyBook.Utility
             UpdateCoverType,
             DeleteCoverType
         }
+
+        public static string Admin { get { return "Admin"; } set { } }
+        public static string Company_Customer { get { return "Company Customer"; } set { } }
+        public static string Employee { get { return "Employee"; } set { } }
+        public static string Individual_Customer { get { return "Individual Customer"; } set { } }
     }
 }

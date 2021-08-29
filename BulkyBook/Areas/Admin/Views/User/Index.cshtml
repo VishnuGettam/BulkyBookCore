@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BulkyBook.Models.ViewModels.ApplicationUser>
+
+<div class="row">
+    <div class="col-6">
+        Category List
+    </div>
+    <div class="col-6 text-end">
+        <a class="btn btn-primary btn-sm" asp-area="Identity" asp-page="/Account/Register"> <i class="fas fa-plus"></i> Create New User</a>
+    </div>
+</div>
+
+<div class="row mt-4 ">
+    <table class="table table-bordered" id="tableUsers">
+        <thead class="table-primary">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>City</th>
+                <th>Email</th>
+                <th>State</th>
+                <th>Company</th>
+                <th>Role</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript" src="~/js/User.js"></script>
+}

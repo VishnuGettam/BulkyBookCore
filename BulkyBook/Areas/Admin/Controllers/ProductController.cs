@@ -1,6 +1,7 @@
 ﻿using BulkyBook.DataAccess.Data;
 using BulkyBook.DataAccess.Repository;
 using BulkyBook.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 namespace BulkyBook.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -39,7 +41,6 @@ namespace BulkyBook.Areas.Admin.Controllers
             ViewBag.Categories = new SelectList(_unitofWork.Category.GetAll(), "Id", "Name");
             ViewBag.CoverTypes = new SelectList(_unitofWork.CoverType.GetAll(), "Id", "Name");
             ViewBag.Type = "Create";
-
 
             if (Id != null)
             {
