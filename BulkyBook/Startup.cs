@@ -1,5 +1,6 @@
-using BulkyBook.DataAccess.Data;
+﻿using BulkyBook.DataAccess.Data;
 using BulkyBook.DataAccess.Repository;
+using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,14 +37,19 @@ namespace BulkyBook
             services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            //services.AddIdentity<IdentityUser, IdentityRole>()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            //services.AddRazorPages();
-
             services.AddScoped<IUnitofWork, UnitofWork>();
 
             services.AddControllersWithViews();
+
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = "684152439193838";
+                options.AppSecret = "cf5155dfd01da7cd08a5ac590689d583";
+            }).AddGoogle(options =>
+            {
+                options.ClientId = "272484567084-sm4en2q4faf676lpe8n8m7epseh3pjun.apps.googleusercontent.com";
+                options.ClientSecret = "-jtcEOn2G0bCEbx68YMDr6wI";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

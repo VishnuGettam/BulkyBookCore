@@ -6,6 +6,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using BulkyBook.Models.ViewModels;
+using BulkyBook.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -51,6 +53,12 @@ namespace BulkyBook.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+
+            public string Name { get; set; }
+
+            public string City { get; set; }
+            public string State { get; set; }
+            public string PostalCode { get; set; }
         }
 
         public IActionResult OnGetAsync()
@@ -72,7 +80,7 @@ namespace BulkyBook.Areas.Identity.Pages.Account
             if (remoteError != null)
             {
                 ErrorMessage = $"Error from external provider: {remoteError}";
-                return RedirectToPage("./Login", new {ReturnUrl = returnUrl });
+                return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
@@ -82,7 +90,7 @@ namespace BulkyBook.Areas.Identity.Pages.Account
             }
 
             // Sign in the user with this external login provider if the user already has a login.
-            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor : true);
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
             if (result.Succeeded)
             {
                 _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
@@ -121,7 +129,16 @@ namespace BulkyBook.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                //var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+
+                var user = new ApplicationUser()
+                {
+                    UserName = Input.Name,
+                    Email = Input.Email,
+                    City = Input.City,
+                    State = Input.State,
+                    PostalCode = Input.PostalCode,
+                };
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
@@ -133,6 +150,8 @@ namespace BulkyBook.Areas.Identity.Pages.Account
 
                         var userId = await _userManager.GetUserIdAsync(user);
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        await _userManager.AddToRoleAsync(user, SD.Individual_Customer);
+
                         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                         var callbackUrl = Url.Page(
                             "/Account/ConfirmEmail",
