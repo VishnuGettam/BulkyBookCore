@@ -39,19 +39,21 @@
                                 </div>
                             </li>
                         }
-                        
-                        @if(User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Employee"))) { 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                User/Company
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Company" asp-action="Index">Company</a>
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Index">Users </a>
-                            </div>
-                        </li>
-                        }
 
+                        @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Employee")))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    User/Company
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Company" asp-action="Index">Company</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Index">Users </a>
+                                </div>
+                            </li>
+
+                        }
+                        <partial name="_CartCountPartial" />
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

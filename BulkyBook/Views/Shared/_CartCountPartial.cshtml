@@ -1,0 +1,34 @@
+﻿@inject BulkyBook.DataAccess.Repository.IUnitofWork _uniofWork;
+@inject BulkyBook.DataAccess.Data.ApplicationDbContext _appDb ;
+
+@{
+
+    string userId = _uniofWork.ApplicationUser.GetFirstOrDefault(u => u.UserName == User.Identity.Name)?.Id;
+    var count = _appDb.ShoppingCarts.Where(s => s.ApplicationUserId == userId).Sum(p => p.Count);
+
+}
+
+<style>
+    .badge:after {
+        content: "@count";
+        position: absolute;
+        /*background:white ;*/
+        bottom: 0.1rem;
+        left: 0.9rem;
+        width: 2rem;
+        text-align: center;
+        line-height: 2rem;
+        font-size: 1rem;
+        border-radius: 10%;
+        color:tomato;
+        /*color: white;*/
+        /*border: 0.5px solid white;*/
+    }
+</style>
+
+<li class="nav-item">
+    <a class="btn btn-primary" asp-action="Index" asp-controller="ShoppingCart" asp-area="Customer">
+        <i class="fa fa-shopping-cart badge"> </i>
+        @*<span>@count</span>*@
+    </a>
+</li>

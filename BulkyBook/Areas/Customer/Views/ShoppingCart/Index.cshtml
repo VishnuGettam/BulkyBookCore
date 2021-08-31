@@ -1,0 +1,92 @@
+﻿@model BulkyBook.Models.ViewModels.ShoppingCartViewModel
+
+<form method="post">
+
+    <br />
+    <div class="backgroundWhiteBorder">
+        <div class="container">
+            <div class="card">
+                <div class="card-header bg-dark text-light ml-0 row container" style="position:inherit;left:11px">
+                    <div class="col-6">
+                        <i class="fa fa-shopping-cart"></i> &nbsp;
+                        Shopping Cart
+                    </div>
+                    <div class="col-6 my-2 my-lg-0">
+                        <div class="float-end">
+                            <a class="btn btn-info btn-sm " asp-controller="Home" asp-action="Index" asp-area="Customer">Continue Shopping</a>
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model?.ListCart?.Count > 0)
+                {
+
+                    <div class="card-body">
+                        @foreach (var prd in Model.ListCart)
+                        {
+                            <div class="row">
+                                <div class="d-none d-lg-block col-lg-1 text-center py-2">
+                                    <img src="data:image/png;base64,@prd.Product.ImageURL" class="rounded" width="100%" />
+                                </div>
+                                <div class="col-12 text-sm-center col-lg-6 text-lg-left">
+                                    <h5><strong>@prd.Product.Title</strong></h5>
+                                    <p><small>@prd.Product.Description</small></p>
+                                </div>
+                                <div class="col-12 text-sm-center col-lg-5 text-lg-right row">
+                                    <div class="col-4 text-md-right" style="padding-top:5px;">
+                                        <h6><strong>@prd.Price.ToString("C")<span class="text-muted">x</span> @prd.Count</strong></h6>
+                                    </div>
+                                    <div class="col-6 col-sm-4 col-lg-6">
+                                        <div class="float-right mx-1">
+                                            <a asp-action="UpdateProductCount" asp-route-id="@prd.Product.Id" class="btn btn-primary">
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                        </div>
+                                        <div class="float-right mx-1">
+                                            <a asp-action="ReduceProductCount" asp-route-id="@prd.Product.Id" class="btn btn-danger">
+                                                <i class="fas fa-minus"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 col-sm-4 col-lg-2 text-right">
+                                        <a asp-action="RemoveFromCart" asp-route-id="@prd.Product.Id" class="btn btn-outline-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                        }
+
+                        <div class="row mb-2">
+                            <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 pr-4">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between bg-light">
+                                        <span class="text-info"> Total (USD)</span>
+                                        <strong class="text-info">
+                                            <span id="txtOrderTotal">
+
+                                                @Model.OrderHeader.OrderTotal.ToString("C")
+                                            </span>
+                                        </strong>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+                <div class="card-footer">
+                    <div class="card-footer row">
+
+                        <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
+
+                            <a class="btn btn-success form-control" asp-action="Summary">Summary</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
