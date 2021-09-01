@@ -1,6 +1,13 @@
 ﻿@model BulkyBook.Models.ViewModels.ShoppingCartViewModel
+@using Microsoft.Extensions.Options
 
-<form method="post">
+@inject IOptions<BulkyBook.Models.ViewModels.StripeSettings> StripeSettings
+
+<form method="post" asp-antiforgery="true">
+
+    <div asp-validation-summary="All" class="text-danger">
+    </div>
+
     <br />
     <div class="backgroundWhiteBorder">
         <div class="container">
@@ -31,6 +38,7 @@
                                     </div>
                                     <div class="col-9">
                                         <input type="text" class="form-control" value="@Model.OrderHeader.Name" />
+                                        <span asp-validation-for="@Model.OrderHeader.Name" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row my-1">
@@ -39,6 +47,7 @@
                                     </div>
                                     <div class="col-9">
                                         <input type="text" class="form-control" value="@Model.OrderHeader.PhoneNumber" />
+                                        <span asp-validation-for="@Model.OrderHeader.PhoneNumber" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row my-1">
@@ -47,6 +56,7 @@
                                     </div>
                                     <div class="col-9">
                                         <input type="text" class="form-control" value="@Model.OrderHeader.StreetAddress" />
+                                        <span asp-validation-for="@Model.OrderHeader.StreetAddress" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row my-1">
@@ -55,6 +65,7 @@
                                     </div>
                                     <div class="col-9">
                                         <input type="text" class="form-control" value="@Model.OrderHeader.City" />
+                                        <span asp-validation-for="@Model.OrderHeader.City" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row my-1">
@@ -63,6 +74,7 @@
                                     </div>
                                     <div class="col-9">
                                         <input type="text" class="form-control" value="@Model.OrderHeader.State" />
+                                        <span asp-validation-for="@Model.OrderHeader.State" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row my-1">
@@ -71,6 +83,7 @@
                                     </div>
                                     <div class="col-9">
                                         <input type="text" class="form-control" value="@Model.OrderHeader.PostalCode" />
+                                        <span asp-validation-for="@Model.OrderHeader.PostalCode" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +119,7 @@
                         </div>
                         <div class="col-12 col-md-4">
 
-                            <button type="submit" value="Place Order" class="btn btn-success form-control">Place Order</button>
+                            <button type="submit" value="Place Order" class="btn btn-success form-control" asp-action="Summary">Place Order</button>
                         </div>
                     </div>
                 </div>
@@ -114,3 +127,6 @@
         </div>
     </div>
 </form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial.cshtml" />
+}

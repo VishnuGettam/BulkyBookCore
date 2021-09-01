@@ -5,21 +5,23 @@
     <br />
     <div class="backgroundWhiteBorder">
         <div class="container">
-            <div class="card">
-                <div class="card-header bg-dark text-light ml-0 row container" style="position:inherit;left:11px">
-                    <div class="col-6">
-                        <i class="fa fa-shopping-cart"></i> &nbsp;
-                        Shopping Cart
-                    </div>
-                    <div class="col-6 my-2 my-lg-0">
-                        <div class="float-end">
-                            <a class="btn btn-info btn-sm " asp-controller="Home" asp-action="Index" asp-area="Customer">Continue Shopping</a>
+
+            @if (Model?.ListCart?.Count > 0)
+            {
+                <div class="card">
+                    <div class="card-header bg-dark text-light ml-0 row container" style="position:inherit;left:11px">
+                        <div class="col-6">
+                            <i class="fa fa-shopping-cart"></i> &nbsp;
+                            Shopping Cart
+                        </div>
+                        <div class="col-6 my-2 my-lg-0">
+                            <div class="float-end">
+                                <a class="btn btn-info btn-sm " asp-controller="Home" asp-action="Index" asp-area="Customer">Continue Shopping</a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                @if (Model?.ListCart?.Count > 0)
-                {
+
 
                     <div class="card-body">
                         @foreach (var prd in Model.ListCart)
@@ -75,18 +77,25 @@
                         </div>
                     </div>
 
-                }
 
-                <div class="card-footer">
-                    <div class="card-footer row">
 
-                        <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
+                    <div class="card-footer">
+                        <div class="card-footer row">
 
-                            <a class="btn btn-success form-control" asp-action="Summary">Summary</a>
+                            <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
+
+                                <a class="btn btn-success form-control" asp-action="Summary">Summary</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
+            else
+            {
+                <div class="text-warning text-center fw-bolder   ">
+                      No items in Cart ...
+                </div>
+            }
         </div>
     </div>
 </form>

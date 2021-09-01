@@ -1,5 +1,6 @@
 ﻿using BulkyBook.DataAccess.Data;
 using BulkyBook.DataAccess.Repository;
+using BulkyBook.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +52,10 @@ namespace BulkyBook
                 options.ClientId = "272484567084-sm4en2q4faf676lpe8n8m7epseh3pjun.apps.googleusercontent.com";
                 options.ClientSecret = "-jtcEOn2G0bCEbx68YMDr6wI";
             });
+
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+
+            services.Configure<TwilioSettings>(Configuration.GetSection("Twilio"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,7 +76,7 @@ namespace BulkyBook
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["Secretkey"];
             app.UseAuthentication();
             app.UseAuthorization();
 
